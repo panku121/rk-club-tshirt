@@ -65,21 +65,75 @@
               <span class="error" data-error-for="phone"></span>
             </div>
 
+            <div class="field">
+              <span class="field-label" id="sizeLabel">T-Shirt Size</span>
+              <div class="size-grid" role="radiogroup" aria-labelledby="sizeLabel">
+                <label class="size-card">
+                  <input type="radio" name="sizeOption" value="36/S" />
+                  <span class="size-chest">36</span>
+                  <span class="size-code">S</span>
+                </label>
+                <label class="size-card">
+                  <input type="radio" name="sizeOption" value="38/M" />
+                  <span class="size-chest">38</span>
+                  <span class="size-code">M</span>
+                </label>
+                <label class="size-card">
+                  <input type="radio" name="sizeOption" value="40/L" />
+                  <span class="size-chest">40</span>
+                  <span class="size-code">L</span>
+                </label>
+                <label class="size-card">
+                  <input type="radio" name="sizeOption" value="42/XL" />
+                  <span class="size-chest">42</span>
+                  <span class="size-code">XL</span>
+                </label>
+                <label class="size-card">
+                  <input type="radio" name="sizeOption" value="44/XXL" />
+                  <span class="size-chest">44</span>
+                  <span class="size-code">XXL</span>
+                </label>
+                <label class="size-card">
+                  <input type="radio" name="sizeOption" value="46/3XL" />
+                  <span class="size-chest">46</span>
+                  <span class="size-code">3XL</span>
+                </label>
+                <label class="size-card">
+                  <input type="radio" name="sizeOption" value="48/4XL" />
+                  <span class="size-chest">48</span>
+                  <span class="size-code">4XL</span>
+                </label>
+              </div>
+              <input type="hidden" id="size" name="size" value="" required />
+              <span class="error" data-error-for="size"></span>
+            </div>
+
+            <div class="field">
+              <label for="backNumber">Number on T-Shirt Back</label>
+              <input
+                type="text"
+                id="backNumber"
+                name="backNumber"
+                placeholder="e.g. 001, 07, 700"
+                inputmode="numeric"
+                maxlength="3"
+                required
+              />
+              <span class="error" data-error-for="backNumber"></span>
+            </div>
+
             <div class="field-row">
               <div class="field">
-                <label for="size">T-Shirt Size</label>
-                <select id="size" name="size" required>
-                  <option value="" disabled selected>Select size</option>
-                  <option value="XS">XS</option>
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="L">L</option>
-                  <option value="XL">XL</option>
-                  <option value="XXL">XXL</option>
-                  <option value="3XL">3XL</option>
-                  <option value="4XL">4XL</option>
-                </select>
-                <span class="error" data-error-for="size"></span>
+                <label for="backName">Name on T-Shirt Back</label>
+                <input
+                  type="text"
+                  id="backName"
+                  name="backName"
+                  placeholder="PRINT NAME ON JERSEY"
+                  maxlength="12"
+                  required
+                />
+                <span class="error" data-error-for="backName"></span>
               </div>
 
               <div class="field">
@@ -91,35 +145,6 @@
                   <option value="Three-Quarter Sleeve">Three-Quarter Sleeve</option>
                 </select>
                 <span class="error" data-error-for="sleeveLength"></span>
-              </div>
-            </div>
-
-            <div class="field-row">
-              <div class="field">
-                <label for="backNumber">Back Number</label>
-                <input
-                  type="text"
-                  id="backNumber"
-                  name="backNumber"
-                  placeholder="e.g. 07 or 007"
-                  inputmode="numeric"
-                  maxlength="3"
-                  required
-                />
-                <span class="error" data-error-for="backNumber"></span>
-              </div>
-
-              <div class="field">
-                <label for="backName">Back Name</label>
-                <input
-                  type="text"
-                  id="backName"
-                  name="backName"
-                  placeholder="Name on jersey"
-                  maxlength="12"
-                  required
-                />
-                <span class="error" data-error-for="backName"></span>
               </div>
             </div>
 

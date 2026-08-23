@@ -48,21 +48,17 @@ function validateSelect(value, label) {
 }
 
 function validateBackNumber(value) {
-  if (value === "") return "Please enter a back number.";
+  if (value === "") return "Please enter a number for the t-shirt back.";
   if (!/^\d{1,3}$/.test(value)) {
-    return "Back number may contain digits only.";
-  }
-  const num = Number(value);
-  if (num > 99) {
-    return "Back number must be between 0 and 99.";
+    return "Number on t-shirt back may contain 1 to 3 digits only.";
   }
   return "";
 }
 
 function validateBackName(value) {
-  if (!value.trim()) return "Please enter a back name.";
+  if (!value.trim()) return "Please enter a name for the t-shirt back.";
   if (!/^[A-Za-z ]+$/.test(value.trim())) {
-    return "Back name may contain letters only.";
+    return "Name on t-shirt back may contain letters only.";
   }
   return "";
 }
@@ -135,6 +131,23 @@ async function saveToGoogleSheet(payload) {
   });
 }
 
+const sizeOptions = document.querySelectorAll('input[name="sizeOption"]');
+
+function syncSelectedSize() {
+  const selected = document.querySelector('input[name="sizeOption"]:checked');
+  fields.size.value = selected ? selected.value : "";
+  sizeOptions.forEach((item) => {
+    item.closest(".size-card").classList.toggle("is-selected", item.checked);
+  });
+}
+
+sizeOptions.forEach((option) => {
+  option.addEventListener("change", () => {
+    syncSelectedSize();
+    setError(fields.size, validateSelect(fields.size.value, "size"));
+  });
+});
+
 fields.backNumber.addEventListener("input", () => {
   fields.backNumber.value = fields.backNumber.value.replace(/\D/g, "").slice(0, 3);
   updatePreview();
@@ -168,6 +181,7 @@ form.addEventListener("submit", async (event) => {
   try {
     await saveToGoogleSheet(getFormPayload());
     form.reset();
+    syncSelectedSize();
     updatePreview();
     showPopup();
   } catch (error) {

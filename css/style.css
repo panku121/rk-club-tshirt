@@ -160,7 +160,8 @@ body {
   gap: 14px;
 }
 
-label {
+label,
+.field-label {
   font-family: "Rajdhani", sans-serif;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -169,7 +170,84 @@ label {
   color: var(--gold-soft);
 }
 
-input,
+.size-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.size-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 62px;
+  padding: 8px 4px 7px;
+  border-radius: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  background:
+    linear-gradient(180deg, rgba(19, 40, 68, 0.55), rgba(6, 16, 28, 0.92));
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--white);
+  user-select: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.size-card input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+  height: auto;
+  width: 100%;
+}
+
+.size-chest {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.size-code {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold-soft);
+}
+
+.size-card:hover {
+  border-color: rgba(212, 175, 55, 0.7);
+  transform: translateY(-1px);
+}
+
+.size-card.is-selected,
+.size-card:has(input:checked) {
+  border-color: var(--gold);
+  background:
+    linear-gradient(180deg, rgba(212, 175, 55, 0.28), rgba(12, 28, 51, 0.95));
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.18),
+    0 8px 18px rgba(212, 175, 55, 0.16);
+}
+
+.size-card:has(input:focus-visible) {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+}
+
+.field.invalid .size-grid {
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px var(--error);
+}
+
+input:not([type="radio"]):not([type="hidden"]),
 select {
   width: 100%;
   height: 48px;
@@ -197,13 +275,13 @@ input::placeholder {
   color: #7e8aa0;
 }
 
-input:focus,
+input:not([type="radio"]):not([type="hidden"]):focus,
 select:focus {
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
 }
 
-.field.invalid input,
+.field.invalid input:not([type="radio"]):not([type="hidden"]),
 .field.invalid select {
   border-color: var(--error);
 }
@@ -508,9 +586,28 @@ select:focus {
   }
 }
 
+@media (max-width: 720px) {
+  .size-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 560px) {
   .page {
     padding: 8px 8px 12px;
+  }
+
+  .size-grid {
+    gap: 6px;
+  }
+
+  .size-card {
+    min-height: 54px;
+    padding: 6px 2px;
+  }
+
+  .size-chest {
+    font-size: 1.18rem;
   }
 
   .logo-wrap {
@@ -541,7 +638,7 @@ select:focus {
     font-size: 0.88rem;
   }
 
-  input,
+  input:not([type="radio"]):not([type="hidden"]),
   select {
     height: 44px;
   }
