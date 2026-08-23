@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <title>RK Cricket Club | T-Shirt Order</title>
+    <link rel="icon" href="assets/rkCricketLogo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Rajdhani:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="pitch-bg" aria-hidden="true"></div>
+    <div class="glow glow-left" aria-hidden="true"></div>
+    <div class="glow glow-right" aria-hidden="true"></div>
+
+    <main class="page">
+      <section class="form-card">
+        <header class="form-header">
+          <div class="logo-wrap">
+            <img
+              src="assets/rkCricketLogo.png"
+              alt="RK Cricket Club logo"
+              class="club-logo"
+            />
+          </div>
+          <p class="eyebrow">Season Kit Order</p>
+          <h1>RK Cricket Club</h1>
+          <p class="tagline">Complete the form below to place your T-shirt order</p>
+        </header>
+
+        <div class="layout">
+          <form id="tshirtForm" class="order-form" novalidate>
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="e.g. Rohit Sharma"
+                autocomplete="name"
+                maxlength="60"
+                required
+              />
+              <span class="error" data-error-for="fullName"></span>
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                inputmode="numeric"
+                placeholder="10-digit mobile number"
+                autocomplete="tel"
+                maxlength="10"
+                required
+              />
+              <span class="error" data-error-for="phone"></span>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="size">T-Shirt Size</label>
+                <select id="size" name="size" required>
+                  <option value="" disabled selected>Select size</option>
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                  <option value="3XL">3XL</option>
+                  <option value="4XL">4XL</option>
+                </select>
+                <span class="error" data-error-for="size"></span>
+              </div>
+
+              <div class="field">
+                <label for="sleeveLength">Sleeve Length</label>
+                <select id="sleeveLength" name="sleeveLength" required>
+                  <option value="" disabled selected>Select sleeve length</option>
+                  <option value="Full">Full</option>
+                  <option value="Half">Half</option>
+                  <option value="Three-Quarter Sleeve">Three-Quarter Sleeve</option>
+                </select>
+                <span class="error" data-error-for="sleeveLength"></span>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="backNumber">Back Number</label>
+                <input
+                  type="text"
+                  id="backNumber"
+                  name="backNumber"
+                  placeholder="e.g. 07 or 007"
+                  inputmode="numeric"
+                  maxlength="3"
+                  required
+                />
+                <span class="error" data-error-for="backNumber"></span>
+              </div>
+
+              <div class="field">
+                <label for="backName">Back Name</label>
+                <input
+                  type="text"
+                  id="backName"
+                  name="backName"
+                  placeholder="Name on jersey"
+                  maxlength="12"
+                  required
+                />
+                <span class="error" data-error-for="backName"></span>
+              </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="submit-btn">
+              <span class="btn-text">Submit Order</span>
+              <span class="btn-loader" aria-hidden="true"></span>
+            </button>
+          </form>
+
+          <aside class="jersey-preview" aria-hidden="true">
+            <p class="preview-label">Jersey Preview</p>
+            <div class="jersey" id="jerseyPreview">
+              <div class="jersey-body">
+                <span class="jersey-number" id="previewNumber">00</span>
+                <span class="jersey-name" id="previewName">NAME</span>
+              </div>
+              <div class="jersey-sleeve jersey-sleeve-left"></div>
+              <div class="jersey-sleeve jersey-sleeve-right"></div>
+            </div>
+            <p class="preview-hint">Live preview of name and number on the back</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <div id="successPopup" class="popup-overlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle" hidden>
+      <div class="popup-card">
+        <div class="popup-icon">✓</div>
+        <h2 id="popupTitle">Thank You!</h2>
+        <p>Your details have been shared with the Captain.</p>
+        <button type="button" id="popupClose" class="popup-btn">OK</button>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
