@@ -107,14 +107,18 @@ function setLoading(isLoading) {
 }
 
 function getFormPayload() {
+  syncSelectedSize();
+  syncSelectedPackage();
   return {
     fullName: fields.fullName.value.trim(),
     phone: fields.phone.value.trim(),
     size: fields.size.value,
     orderPackage: fields.orderPackage.value,
+    packageOption: fields.orderPackage.value,
     sleeveLength: fields.sleeveLength.value,
     backNumber: String(fields.backNumber.value),
     backName: fields.backName.value.trim().toUpperCase(),
+    paymentStatus: "Not Paid",
   };
 }
 
@@ -196,6 +200,8 @@ Object.values(fields).forEach((input) => {
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  syncSelectedSize();
+  syncSelectedPackage();
   if (!validateForm()) return;
 
   setLoading(true);
