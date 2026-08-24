@@ -66,6 +66,29 @@
             </div>
 
             <div class="field">
+              <span class="field-label" id="packageLabel">Order Package</span>
+              <div class="package-grid" role="radiogroup" aria-labelledby="packageLabel">
+                <label class="package-card">
+                  <input type="radio" name="packageOption" value="Tshirt only (500/-)" />
+                  <span class="package-name">T-Shirt Only</span>
+                  <span class="package-price">₹500</span>
+                </label>
+                <label class="package-card">
+                  <input type="radio" name="packageOption" value="Tee + Cap (700/-)" />
+                  <span class="package-name">Tee + Cap</span>
+                  <span class="package-price">₹700</span>
+                </label>
+                <label class="package-card">
+                  <input type="radio" name="packageOption" value="Tee + Lower + Cap (950/-)" />
+                  <span class="package-name">Tee + Lower + Cap</span>
+                  <span class="package-price">₹950</span>
+                </label>
+              </div>
+              <input type="hidden" id="orderPackage" name="orderPackage" value="" required />
+              <span class="error" data-error-for="orderPackage"></span>
+            </div>
+
+            <div class="field">
               <span class="field-label" id="sizeLabel">T-Shirt Size</span>
               <div class="size-grid" role="radiogroup" aria-labelledby="sizeLabel">
                 <label class="size-card">

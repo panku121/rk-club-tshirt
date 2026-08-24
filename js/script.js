@@ -12,6 +12,7 @@ const fields = {
   fullName: document.getElementById("fullName"),
   phone: document.getElementById("phone"),
   size: document.getElementById("size"),
+  orderPackage: document.getElementById("orderPackage"),
   sleeveLength: document.getElementById("sleeveLength"),
   backNumber: document.getElementById("backNumber"),
   backName: document.getElementById("backName"),
@@ -68,6 +69,7 @@ function validateForm() {
     fullName: validateName(fields.fullName.value),
     phone: validatePhone(fields.phone.value),
     size: validateSelect(fields.size.value, "size"),
+    orderPackage: validateSelect(fields.orderPackage.value, "package"),
     sleeveLength: validateSelect(fields.sleeveLength.value, "sleeve length"),
     backNumber: validateBackNumber(fields.backNumber.value),
     backName: validateBackName(fields.backName.value),
@@ -109,6 +111,7 @@ function getFormPayload() {
     fullName: fields.fullName.value.trim(),
     phone: fields.phone.value.trim(),
     size: fields.size.value,
+    orderPackage: fields.orderPackage.value,
     sleeveLength: fields.sleeveLength.value,
     backNumber: String(fields.backNumber.value),
     backName: fields.backName.value.trim().toUpperCase(),
@@ -148,6 +151,23 @@ sizeOptions.forEach((option) => {
   });
 });
 
+const packageOptions = document.querySelectorAll('input[name="packageOption"]');
+
+function syncSelectedPackage() {
+  const selected = document.querySelector('input[name="packageOption"]:checked');
+  fields.orderPackage.value = selected ? selected.value : "";
+  packageOptions.forEach((item) => {
+    item.closest(".package-card").classList.toggle("is-selected", item.checked);
+  });
+}
+
+packageOptions.forEach((option) => {
+  option.addEventListener("change", () => {
+    syncSelectedPackage();
+    setError(fields.orderPackage, validateSelect(fields.orderPackage.value, "package"));
+  });
+});
+
 fields.backNumber.addEventListener("input", () => {
   fields.backNumber.value = fields.backNumber.value.replace(/\D/g, "").slice(0, 3);
   updatePreview();
@@ -167,6 +187,7 @@ Object.values(fields).forEach((input) => {
     if (input === fields.fullName) setError(input, validateName(input.value));
     if (input === fields.phone) setError(input, validatePhone(input.value));
     if (input === fields.size) setError(input, validateSelect(input.value, "size"));
+    if (input === fields.orderPackage) setError(input, validateSelect(input.value, "package"));
     if (input === fields.sleeveLength) setError(input, validateSelect(input.value, "sleeve length"));
     if (input === fields.backNumber) setError(input, validateBackNumber(input.value));
     if (input === fields.backName) setError(input, validateBackName(input.value));
@@ -182,6 +203,7 @@ form.addEventListener("submit", async (event) => {
     await saveToGoogleSheet(getFormPayload());
     form.reset();
     syncSelectedSize();
+    syncSelectedPackage();
     updatePreview();
     showPopup();
   } catch (error) {

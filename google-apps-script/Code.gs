@@ -17,6 +17,7 @@
 
 var SHEET_NAME = "rkCricketClub";
 var BACK_NUMBER_COL = 5;
+var DEFAULT_PAYMENT_STATUS = "Not Paid";
 var HEADERS = [
   "Timestamp",
   "Full Name",
@@ -24,7 +25,9 @@ var HEADERS = [
   "T-Shirt Size",
   "Back Number",
   "Back Name",
-  "Sleeve Length"
+  "Sleeve Length",
+  "Order Package",
+  "Payment Status"
 ];
 
 function doGet(e) {
@@ -57,7 +60,9 @@ function handleRequest(e) {
       data.size || "",
       backNumber,
       data.backName || "",
-      data.sleeveLength || ""
+      data.sleeveLength || "",
+      data.orderPackage || "",
+      DEFAULT_PAYMENT_STATUS
     ]]);
     sheet.getRange(nextRow, BACK_NUMBER_COL).setNumberFormat("@").setValue(backNumber);
 
@@ -80,8 +85,10 @@ function getOrCreateSheet() {
 
 function ensureHeaders(sheet) {
   var firstRow = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
-  var hasHeaders = firstRow.join("") !== "";
-  if (!hasHeaders) {
+  var headerMismatch = HEADERS.some(function (header, index) {
+    return firstRow[index] !== header;
+  });
+  if (headerMismatch) {
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold");
     sheet.setFrozenRows(1);
@@ -101,7 +108,8 @@ function getRequestData(e) {
     size: params.size || "",
     backNumber: params.backNumber || "",
     backName: params.backName || "",
-    sleeveLength: params.sleeveLength || ""
+    sleeveLength: params.sleeveLength || "",
+    orderPackage: params.orderPackage || ""
   };
 }
 
